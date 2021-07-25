@@ -21,28 +21,22 @@ public class Solution24 {
 
     public ListNode swapPairs(ListNode head) {
 
-        if(head==null || head.next==null)
+        if(head==null)
             return head;
 
-        ListNode vhNode = new ListNode(-1, null);
+        ListNode vhNode = new ListNode(-1, head);
 
         ListNode a = vhNode;
-        while (head != null) {
+        while (head != null && head.next!=null) {
 
             ListNode left = head;
             ListNode right = head.next;
-            if(right==null) {
 
-                a.next=left;
-                break;
-            }else {
-
-                head = right.next;
-            }
-            a.next = right;
-            right.next = left;
-            left.next=null;
-            a = left;
+            left.next=right.next;
+            right.next=left;
+            a.next=right;
+            a=left;
+            head=left.next;
         }
         return vhNode.next;
     }
