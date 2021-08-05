@@ -50,6 +50,40 @@ public class Solution594 {
         return res;
     }
 
+    //利用hash表
+    public int findLHS3(int[] nums) {
+
+        int res=0;
+        Map<Integer, Integer> map = new HashMap<>();
+        for (int i = 0; i < nums.length; i++) {
+
+            Integer count = map.get(nums[i]);
+            if(count==null) {
+
+                map.put(nums[i],1);
+            }
+            else {
+
+                map.put(nums[i],1+count);
+            }
+        }
+        for(Integer key:map.keySet()) {
+
+            Integer cur = map.get(key);
+            Integer pre = map.get(key - 1);
+            if(pre!=null) {
+
+                res = Math.max(res,cur+pre);
+            }
+            Integer next = map.get(key + 1);
+            if(next!=null) {
+
+                res = Math.max(res,cur+next);
+            }
+        }
+        return res;
+    }
+
     public static void main(String[] args) {
 
         int[] data = new int[8];
